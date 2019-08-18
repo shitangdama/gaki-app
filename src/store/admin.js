@@ -1,11 +1,11 @@
 import _ from 'lodash'
 import { observable, action, runInAction } from 'mobx'
 
-import ApiService from '../services/ApiService'
-import api from '../config/index'
+import AdminService from '../services/AdminService'
+import api from '../config/api'
 
 
-class Admin extends ApiService {
+class Admin {
 
 
     @observable auth_token = ""
@@ -18,9 +18,7 @@ class Admin extends ApiService {
 
     @action 
     login = async (params) => {
-        const url = `${api.auht}`
-        const res = await this.apiCall(url, 'GET', token, null, params);
-        // const data = ErrorService.handleCommonError(res)
+        const data = await AdminService.login(params)
         // return data;
 
         console.log(data)

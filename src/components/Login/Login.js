@@ -1,17 +1,20 @@
 import React from 'react';
-
+import { inject, observer } from 'mobx-react'
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 
 import './Login.less'
 const FormItem = Form.Item;
 
+
+@inject('admin')
+@observer
 class LoginForm extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if(!err) {
-                // this.props.admin.login(values)
+                this.props.admin.login(values)
                 console.log(values)
             }
         })

@@ -1,4 +1,4 @@
-import admin from './pod'
+import admin from './admin'
 
 export default {
     admin
