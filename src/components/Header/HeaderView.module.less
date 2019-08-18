@@ -1,5 +1,7 @@
 @import '~antd/lib/style/themes/default.less';
 
+@pro-header-hover-bg: rgba(0, 0, 0, 0.025);
+
 .fixedHeader {
   position: relative;
   height: @layout-header-height;
@@ -8,5 +10,34 @@
   z-index: 2;
   background: #fff;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
-  transition: width 0.2s;
+}
+
+.right {
+  float: right;
+  height: 100%;
+  overflow: hidden;
+  .action {
+    display: inline-block;
+    height: 100%;
+    padding: 0 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+    > i {
+      color: @text-color;
+      vertical-align: middle;
+    }
+    &:hover {
+      background: @pro-header-hover-bg;
+    }
+    &:global(.opened) {
+      background: @pro-header-hover-bg;
+    }
+  }
+  .account {
+    .avatar {
+      margin-right: 5px;
+      color: @primary-color;
+      background: rgba(255, 255, 255, 0.85);
+    }
+  }
 }

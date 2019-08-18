@@ -24,7 +24,6 @@ export default class SiderMenu extends React.Component {
     onMenuClick = (e) => {
         console.log(e)
         history.push("/dashboard" + e.key)
-
     }
 
     render() {
@@ -41,7 +40,7 @@ export default class SiderMenu extends React.Component {
                 <Menu 
                     theme="light" 
                     mode="inline"
-                    defaultSelectedKeys={['1']} 
+                    defaultSelectedKeys={['/']} 
                     onClick={this.onMenuClick}
                 >
                     <Menu.Item key="/">
