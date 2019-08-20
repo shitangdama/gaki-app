@@ -22,7 +22,6 @@ export default class SiderMenu extends React.Component {
     }
 
     onMenuClick = (e) => {
-        console.log(e)
         history.push("/dashboard" + e.key)
     }
 
@@ -47,9 +46,10 @@ export default class SiderMenu extends React.Component {
                         <Icon type="pie-chart" />
                         <span>统计</span>
                     </Menu.Item>
-                    <Menu.Item key="/deployments">
-                        <Icon type="appstore" />
-                        <span>设置</span>
+                    <Menu.Divider />
+                    <Menu.Item key="/users">
+                        <Icon type="team" />
+                        <span>用户设置</span>
                     </Menu.Item>
                 </Menu>
             </Sider>

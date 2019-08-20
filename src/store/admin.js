@@ -1,12 +1,12 @@
 import _ from 'lodash'
 import { observable, action, runInAction } from 'mobx'
 
-import AdminService from '../services/AdminService'
-import api from '../config/api'
+import ApiService from '../services/ApiService'
+import StorageService from '../services/StorageService'
+import history from '../routers/history'
 
 
 class Admin {
-
 
     @observable auth_token = ""
 
@@ -15,13 +15,40 @@ class Admin {
     @observable isLoginStaus = false
     @observable socketStatus = false
 
-
     @action 
-    login = async (params) => {
-        const data = await AdminService.login(params)
-        // return data;
+    login = async (values) => {
+        const params = new URLSearchParams();
+        params.append('username', values.username);
+        params.append('password', values.password);
 
-        console.log(data)
+        const data = await ApiService.login(params)
+
+        if(!_.isNull(data)) {
+            const token = data.access_token
+            const user = data.user
+
+            StorageService.setToken(token)
+            StorageService.setUser(user)
+
+            runInAction(()=>{
+                this.isLoginStaus = true
+                this.auth_token = token
+                this.user = user
+            })
+
+            console.log(data)
+            history.push("/dashboard/")
+        }
+    }
+
+    logout() {
+        StorageService.removeAll()
+        runInAction(() => {
+            this.isLogin = false
+            this.auth_token = ""
+            this.user = {}
+        })
+        history.push('/login')
     }
 }
 
